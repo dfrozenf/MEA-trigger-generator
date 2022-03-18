@@ -18,10 +18,14 @@ satisfied = false;
 while satisfied == false
     choice = menu('Build a new protocol or load one?', 'Build', 'Load');
     if choice == 1      % add prompt and inputdlg window
-        deadtime = input('Please enter your deadtime: ');
-        window = input('How long would you like to record for (symmetrical around stimulus)?: ');
-        stimlength = input('How long would you like to stimulate for?:  ');
-        trialtime = input('How long between each trial?: ');
+        prompt = {'Deadtime', 'Recording Window', 'Stimulation Length', 'Total Trial Time'};
+        dlgtitle = 'Timing parameters';
+        dims = [1 50];
+        timingparameters = str2double(inputdlg(prompt, dlgtitle, dims));  
+        deadtime = timingparameters(1,1);
+        window = timingparameters(2,1);
+        stimlength = timingparameters(3,1);
+        trialtime = timingparameters(4,1);
         fs = 1000;
         t = 0-(window/2 + 0.01 + deadtime):1/fs:trialtime - (window/2 + 0.01 + deadtime);
 
@@ -142,8 +146,8 @@ for k = 1:epoch
     pause(timing.t5);                   % wait time between trials
 
     counter = counter + 1;
-    fprintf('Trial %d \n', counter);
-    toc
+    f = msgbox(sprintf('Trial %d completed in %f seconds', counter, toc));
+    
 end
 
 
