@@ -145,6 +145,11 @@ for k = 1:epoch
     outputSingleScan(nidaq, [0 0 0]);
     pause(timing.t5);                   % wait time between trials
 
+    
+    if exist('f', 'var')
+        delete(f)
+        clear('f')
+    end
     counter = counter + 1;
     f = msgbox(sprintf('Trial %d completed in %f seconds', counter, toc));
     
