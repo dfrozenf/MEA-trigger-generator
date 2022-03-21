@@ -151,7 +151,9 @@ for k = 1:epoch
         clear('f')
     end
     counter = counter + 1;
-    f = msgbox(sprintf('Trial %d completed in %f seconds', counter, toc));
+    trial_time = toc;
+    f = msgbox(sprintf('Trial %d completed in %f seconds', counter, trial_time));
+    fprintf('Trial %d completed in %f seconds', counter, trial_time);
     
 end
 
